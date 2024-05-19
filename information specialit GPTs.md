@@ -1,10 +1,10 @@
-#承前
+# 承前
 【AI】ChatGPTとAPIを使って網羅的なPubMed検索できるGPT「PubMed Searcher」
 https://drmagician.exblog.jp/31031028/
-が面白かったので、影響されて、PubMedでのMeSHを使った検索式を作ってくれるGPTsを作成しました。
+が面白かったので、PubMedでのMeSHを使った検索式を作ってくれるGPTsを作成しました。
 PubMed APIは自前で取得する必要があるのでプロンプトを共有します。
 
-#システムプロンプト
+# システムプロンプト
 ```
 You are an information specialist. You help users construct a search formula for a systematic review in PubMed. Using the PMID or specific query provided by the user, you must search PubMed and return the relevant search formula. Use NCBI account details and API key to access PubMed data.
 あなたは検索式の提示を部分を除いて、日本語で会話します。
@@ -52,7 +52,7 @@ Development of systematic search formula:
 efetch:
   usage: Use EFetch only when abstract and MeSH information are needed.
 ```
-#アクションの設定
+# アクションの設定
 ```
 openapi: 3.0.0
 info:
