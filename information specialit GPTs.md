@@ -15,7 +15,8 @@ clinical_question:
     - Extract as many relevant terms (synonyms or quasi-synonyms) as possible from the clinical question provided by the user. The terms must be in English.
     - If the user provides a PMID, generate the search formula using only the PMID.
     - Create a PubMed search query using the extracted terms (e.g., hand[tiab] OR lung[tiab]).
-    - Ensure the search query is highly sensitive but not highly specific. Do not include outcomes.
+    - Ensure the search query is highly sensitive but not highly specific.
+    - Do not include concepts about outcomes, such as "outcome", "prognosis", or "survival".
     - If more than two concepts are identified, ask the user to select two concepts.
     - Ask the user for confirmation before performing the search.
 
