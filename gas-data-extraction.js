@@ -17,7 +17,8 @@ const FOLDER_ID = "YOUR_FOLDER_ID";
 const geminiApiKey = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
 
 // ★★★ 今後のモデルの進化にあわせて修正を ★★★
-const MODEL_ID = "gemini-2.5-pro";
+const MODEL_ID = "gemini-2.5-flash";
+// 有料版APIキーを持っているなら　gemini-2.5-pro
 
 // 結果を保存するスプレッドシートの固定名
 const RESULT_SHEET_NAME = "ファイル情報抽出結果";
