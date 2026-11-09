@@ -13,6 +13,7 @@
 | [領収書処理自動化](#receipt_summary) | PDF領収書を解析し内容をスプレッドシートに記録 | Google Apps Script |
 | [PubMed検索支援GPTs](#pubmed検索支援gpts) | MeSHを活用した効率的なPubMed検索式作成用GPTsプロンプト | Markdown |
 | [医学教育研究ギャップの言語化支援](#医学教育研究ギャップの言語化支援mededsearchbot) | 臨床現場のもやもやから、既存レビューをもとに研究の新規性を4文で言語化する対話プロンプト。無料版の Gemini・ChatGPT に貼って使う | Markdown |
+| [臨床疑問の構造化支援](#臨床疑問の構造化支援プロンプト臨床疑問の構造化gpts) | 臨床疑問を PICO・PECO などに構造化し、関連する systematic review を PubMed で探す対話プロンプト（EBM のステップ1〜2）。無料版の Gemini・ChatGPT に貼って使う | Markdown |
 
 ## 個別ツールの詳細
 
@@ -109,6 +110,21 @@ PubMedでMeSHを活用した効率的な検索式を作成するためのGPTsプ
 
 - **使用方法**:
   - [MedEd research gap prompt.md](MedEd%20research%20gap%20prompt.md) のプロンプト本文をコピーし、Gemini や ChatGPT（無料版で可）の新しいチャットに貼って送信する
+  - API キーやアカウントの有料登録は不要
+  - AI が示した文献は、リンクを開いて実在を確かめてから使う
+
+### 臨床疑問の構造化支援プロンプト（臨床疑問の構造化GPTs）
+
+EBM のステップ1（臨床疑問の構造化）からステップ2（文献検索）までを支援する対話プロンプトです。疫学者の役の AI が、疑問を分類し、足りない要素を尋ね、答えられる形の疑問に整理します。
+
+- **機能**:
+  - foreground question と background question の判別
+  - 診療の実態・検査の有効性・要因と結果・治療の効果の4分類（と分類不能）への振り分け
+  - 分類に応じた構造化（PO、PECO、診断精度の P・index test・reference test・target condition、PICO）と、P が O の population at risk になっているかの確認
+  - 了承を得たうえで、systematic review に限った PubMed 検索式と検索結果ページの URL の提示
+
+- **使用方法**:
+  - [Clinical question structuring prompt.md](Clinical%20question%20structuring%20prompt.md) のプロンプト本文をコピーし、Gemini や ChatGPT（無料版で可）の新しいチャットに貼って送信する
   - API キーやアカウントの有料登録は不要
   - AI が示した文献は、リンクを開いて実在を確かめてから使う
 
