@@ -80,7 +80,7 @@ gh api -X POST markdown -f mode=gfm -f context=youkiti/oyakudachi \
 
 - 本体のチェックアウトで作業しない。`git worktree add -b <ブランチ> C:/tmp/wt-oyakudachi-<話題> origin/main` で切る
 - コミットメッセージと PR 本文はファイルに書き、`git commit -F`・`gh pr create --body-file` で渡す。PR 本文には、渡し方、変えた点、無料版の事情の確認日を書く
-- 2026-11-09 時点で、oyakudachi の main にはブランチ保護も ruleset も無く、マージ後のブランチ自動削除も切れている。マージの前に `gh api repos/youkiti/oyakudachi/branches/main/protection` を読み、保護が無ければ `--admin` を付けず、そのことを報告に書く。マージは PR 番号を名指ししたカードで本人の了承を得てから行う
+- oyakudachi の main は 2026-11-09 から「PR と承認1件が必須」で守ってあり、マージ後にブランチが自動で消える。マージは PR 番号を名指ししたカードで本人の了承を得てから、`gh pr merge <番号> --merge --admin` で行う。マージの前に `gh api repos/youkiti/oyakudachi/branches/main/protection` を読み、保護が外れていれば `--admin` を付けず、そのことを報告に書く。リモートのブランチは手で消さない（`git push origin --delete` を打たない）
 - 報告の冒頭は「元の目的／前回までに決まったこと／今回変えたもの／ご自身がいまやること」の4行にし、PR の URL を書く。実際に無料版に貼って動かしていなければ、そう書く
 
 ## 無料版の事情（確認日: 2026-11-09、二次情報）
