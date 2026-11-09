@@ -47,7 +47,17 @@ description: 本人が GPTs（ChatGPT のカスタム GPT）で使っていた�
 
 ## 3. ページの型
 
-リポジトリの直下に、ASCII の英語の名前で置く（例: `MedEd research gap prompt.md`）。構成は次の順。
+`prompts/` の下の、研究の段階のフォルダに、ASCII の英語の名前で置く（例: `prompts/1-question/MedEd research gap prompt.md`）。段階のフォルダは次の5つ（2026-11-09 に本人がカードで決定）。どれに当たるか迷うなら、推奨を先頭にしたカードで聞く。5つのどれにも当たらないものが出たら、新しいフォルダを作る前にカードで聞く。
+
+| フォルダ | 段階 | 例 |
+|---|---|---|
+| `prompts/1-question/` | 問いを立てる | 臨床疑問の構造化、医学教育研究ギャップ |
+| `prompts/2-search/` | 文献を探す | PubMed 検索式 |
+| `prompts/3-appraisal/` | 結果を読む | 統計的有意と臨床的意義 |
+| `prompts/4-writing/` | 書く・投稿する | 英語フレーズ抽出、ビジュアルアブストラクト、査読者探し |
+| `prompts/5-teaching/` | 教える・会を開く | ワークショップ計画 |
+
+リポジトリの直下にはファイルを置かない（README と LICENSE だけ）。コードは `notebooks/` と `gas/` に置く。ページの構成は次の順。
 
 1. `# 〈日本語の名前〉（〈GPT の名前〉）`
 2. GPT の説明文を元にした1〜2文の紹介。最終成果物が型（テンプレート）なら引用で示す
@@ -61,8 +71,10 @@ description: 本人が GPTs（ChatGPT のカスタム GPT）で使っていた�
 
 ## 4. README
 
-- 「収録ツール一覧」の表に1行足す。リンク先の見出し名は、GitHub の規則（英字を小文字にし、全角の括弧などの記号を落とす）で作る。例: `## 医学教育研究ギャップの言語化支援（MedEdSearchBot）` → `#医学教育研究ギャップの言語化支援mededsearchbot`
-- 「個別ツールの詳細」の末尾（ライセンスの前）に、機能と使用方法の節を足す。使用方法には、ファイルへのリンク（空白は `%20`）、無料版で可、API キーも有料登録も不要、文献は確かめてから使う、を書く
+README は2か所に書く。
+
+- **トップの `README.md`:** 「プロンプト（AI に貼って使う）」の、その段階の表に1行足す。ツール名はページへの直接のリンク（`prompts/<段階>/<名前>.md`、空白は `%20`）にし、概要の末尾に、無料版で使えるなら「無料版で可」と書く
+- **段階のフォルダの `README.md`:** 機能と使用方法の節を足す。使用方法には、ページへのリンク（同じフォルダなので名前だけ、空白は `%20`）、無料版で可、API キーも有料登録も不要、文献は確かめてから使う、を書く
 
 ## 5. 渡す前の検査
 
@@ -75,6 +87,19 @@ gh api -X POST markdown -f mode=gfm -f context=youkiti/oyakudachi \
 ```
 
 `<pre` が 2 以上なら、本文の中に ``` が残っている。
+
+README のリンクが実在のファイルを指すことも確かめる。リポジトリの根で流し、`NG` が1行も出なければよい。
+
+```bash
+PYTHONUTF8=1 python -c "
+import re,glob,os,urllib.parse
+for md in glob.glob('**/README.md',recursive=True):
+    for t in re.findall(r'\]\(([^)#]+)\)',open(md,encoding='utf-8').read()):
+        if t.startswith('http'): continue
+        p=os.path.join(os.path.dirname(md),urllib.parse.unquote(t))
+        print(('ok ' if os.path.exists(p) else 'NG ')+md+' -> '+t)
+" | grep '^NG'
+```
 
 ## 6. ブランチと PR
 
